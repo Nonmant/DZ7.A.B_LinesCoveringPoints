@@ -89,3 +89,16 @@ TEST_CASE("2 points at the same place", ""){
                     "1 1 "
     );
 }
+
+TEST_CASE("line coordinates in descending order", ""){
+    std::stringstream input(
+            "1 1\n"
+            "3 1\n"
+            "2\n"
+    );
+    std::stringstream output;
+    parseFile(input,output);
+    REQUIRE(output.str() ==
+                    "1 "
+    );
+}

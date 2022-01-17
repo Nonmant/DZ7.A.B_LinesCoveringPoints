@@ -20,6 +20,7 @@ void parseFile(std::istream & input, std::ostream & output){
     int start, end;
     for(unsigned long i = 0; i<nLines; ++i){
         input >> start >> end;
+        if(start>end) std::swap(start,end);
         events[i*2] = {start, LineStart, -1};
         events[i*2 + 1] = {end, LineEnd, -1};
     }
