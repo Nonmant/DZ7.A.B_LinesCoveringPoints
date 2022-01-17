@@ -10,7 +10,7 @@ typedef short int EventType;
 
 void parseFile(std::istream & input, std::ostream & output){
 
-    int nLines, mPoints;
+    unsigned long nLines, mPoints;
     input >> nLines >> mPoints;
 
     //! @brief coordinate, eventType, point index
@@ -18,13 +18,13 @@ void parseFile(std::istream & input, std::ostream & output){
     std::vector<int> points(mPoints);
 
     int start, end;
-    for(int i = 0; i<nLines; ++i){
+    for(unsigned long i = 0; i<nLines; ++i){
         input >> start >> end;
         events[i*2] = {start, LineStart, -1};
         events[i*2 + 1] = {end, LineEnd, -1};
     }
 
-    for(int i = 0; i<mPoints; ++i){
+    for(unsigned long i = 0; i<mPoints; ++i){
         input >> start;
         events[i+nLines*2] = {start,Point,i};
     }
