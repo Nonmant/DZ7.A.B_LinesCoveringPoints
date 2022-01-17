@@ -35,3 +35,57 @@ TEST_CASE("test 1, file", "[simple]"){
             "2 0 "
     );
 }
+
+TEST_CASE("zero length line", ""){
+    std::stringstream input(
+            "2 2\n"
+            "1 1\n"
+            "3 3\n"
+            "1 2\n"
+    );
+    std::stringstream output;
+    parseFile(input,output);
+    REQUIRE(output.str() ==
+                    "1 0 "
+    );
+}
+
+TEST_CASE("no lines", ""){
+    std::stringstream input(
+            "0 1\n"
+            "1\n"
+    );
+    std::stringstream output;
+    parseFile(input,output);
+    REQUIRE(output.str() ==
+                    "0 "
+    );
+}
+
+TEST_CASE("all negative coordinates", ""){
+    std::stringstream input(
+            "3 2\n"
+            "-10 -5\n"
+            "-6 -5\n"
+            "-3 -1\n"
+            "-5 -2\n"
+    );
+    std::stringstream output;
+    parseFile(input,output);
+    REQUIRE(output.str() ==
+                    "2 1 "
+    );
+}
+
+TEST_CASE("2 points at the same place", ""){
+    std::stringstream input(
+            "1 2\n"
+            "0 4\n"
+            "2 2\n"
+    );
+    std::stringstream output;
+    parseFile(input,output);
+    REQUIRE(output.str() ==
+                    "1 1 "
+    );
+}
